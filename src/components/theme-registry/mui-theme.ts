@@ -2,7 +2,7 @@ import { PaletteMode } from '@mui/material';
 import { createTheme, ThemeOptions } from '@mui/material/styles';
 import resolveConfig from 'tailwindcss/resolveConfig';
 
-import { PlusJakarta } from '@/font';
+import { Qiucksand } from '@/font';
 
 import tailwindConfigModule from '../../../tailwind.config';
 
@@ -55,7 +55,7 @@ export const getMuiTheme = (mode: PaletteMode = 'dark') => {
       },
     },
     typography: {
-      fontFamily: PlusJakarta.style.fontFamily,
+      fontFamily: Qiucksand.style.fontFamily,
     },
     breakpoints: {
       values: {
