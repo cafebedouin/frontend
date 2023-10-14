@@ -7,7 +7,9 @@ import { MuiThemeRegistry } from '@/components/theme-registry/MuiThemeRegistry';
 export const AppProviders = ({ children }: { children: ReactNode }) => {
   return (
     <MuiThemeRegistry>
-      <Paper square>{children}</Paper>
+      <Paper elevation={8} square>
+        {children}
+      </Paper>
     </MuiThemeRegistry>
   );
 };
