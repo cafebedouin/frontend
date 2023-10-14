@@ -6,7 +6,12 @@ import { ThemeButton } from '@/components/header/ThemeButton';
 
 const Header = () => {
   return (
-    <Paper component="header" square elevation={4} className="sticky">
+    <Paper
+      component="header"
+      square
+      elevation={4}
+      className="sticky left-0 right-0 top-0"
+    >
       <Toolbar
         component="nav"
         className="mx-auto flex max-w-7xl items-center justify-between px-4 lg:px-8"

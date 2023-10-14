@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 
 import type { Metadata } from 'next';
 
+import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { AppProviders } from '@/components/providers';
 import { Qiucksand } from '@/font';
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <AppProviders>
           <Header />
           {children}
+          <Footer />
         </AppProviders>
       </body>
     </html>

@@ -42,7 +42,7 @@ const HomePage = async () => {
     await activeAuctionRes.json();*/
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center gap-5 p-24">
       <div className="flex flex-row justify-around gap-3">
         <Card className="w-64">
           <CardContent className="text-center">
