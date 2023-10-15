@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 
 import { ErgoToken } from '@/components/icons/ErgoToken';
 import { UpcomingAuctions } from '@/components/Tables';
@@ -38,33 +38,27 @@ const HomePage = async () => {
       <div className="flex h-36 flex-row justify-around gap-6">
         <Card className="flex w-64 items-center justify-center">
           <CardContent className="text-center">
-            <Typography variant="h6" component="div">
-              Next Start
-            </Typography>
-            <Typography variant="body2">
+            <h6>Next Start</h6>
+            <div className="text-title-medium">
               {new Date(data.nextStart).toDateString()}
-            </Typography>
+            </div>
           </CardContent>
         </Card>
         <Card className="flex w-64 items-center justify-center">
           <CardContent className="text-center">
-            <Typography variant="h6" component="div">
-              Current Price
-            </Typography>
-            <Typography variant="body2" className="flex gap-2">
+            <h6>Current Price</h6>
+            <div className="flex items-center gap-2 text-title-medium">
               {data.curPrice.toLocaleString('en-US', {
                 minimumFractionDigits: 3,
-              })}{' '}
+              })}
               <ErgoToken size={16} />
-            </Typography>
+            </div>
           </CardContent>
         </Card>
         <Card className="flex w-64 items-center justify-center">
           <CardContent className="text-center">
-            <Typography variant="h6" component="div">
-              Circulating
-            </Typography>
-            <Typography variant="body2">{data.circulating}</Typography>
+            <h6>Circulating</h6>
+            <div className="text-title-medium">{data.circulating}</div>
           </CardContent>
         </Card>
       </div>

@@ -1,15 +1,13 @@
+'use client';
 import { ReactNode } from 'react';
 
-import { Paper } from '@mui/material';
-
+import { PaperWrapper } from '@/components/providers/PaperWrapper';
 import { MuiThemeRegistry } from '@/components/theme-registry/MuiThemeRegistry';
 
 export const AppProviders = ({ children }: { children: ReactNode }) => {
   return (
     <MuiThemeRegistry>
-      <Paper elevation={8} square className="pb-8">
-        {children}
-      </Paper>
+      <PaperWrapper>{children}</PaperWrapper>
     </MuiThemeRegistry>
   );
 };

@@ -8,6 +8,7 @@ const ErgoToken = ({ size, ...props }: IconProps) => {
       <Image
         width={size}
         height={size}
+        className="dark:invert"
         src="/assets/ergo-logo.svg"
         alt="ergo logo"
       />
