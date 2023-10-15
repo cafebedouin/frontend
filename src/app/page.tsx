@@ -1,15 +1,7 @@
-// Import necessary MUI components
-import {
-  Card,
-  CardContent,
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
+
+import { ErgoToken } from '@/components/icons/ErgoToken';
+import { UpcomingAuctions } from '@/components/Tables';
 
 const HomePage = async () => {
   const res = await fetch('https://api.auctioncoin.app/info');
@@ -43,8 +35,8 @@ const HomePage = async () => {
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-5 p-24">
-      <div className="flex flex-row justify-around gap-3">
-        <Card className="w-64">
+      <div className="flex h-36 flex-row justify-around gap-6">
+        <Card className="flex w-64 items-center justify-center">
           <CardContent className="text-center">
             <Typography variant="h6" component="div">
               Next Start
@@ -54,15 +46,20 @@ const HomePage = async () => {
             </Typography>
           </CardContent>
         </Card>
-        <Card className="w-64">
+        <Card className="flex w-64 items-center justify-center">
           <CardContent className="text-center">
             <Typography variant="h6" component="div">
               Current Price
             </Typography>
-            <Typography variant="body2">{data.curPrice.toFixed(3)}</Typography>
+            <Typography variant="body2" className="flex gap-2">
+              {data.curPrice.toLocaleString('en-US', {
+                minimumFractionDigits: 3,
+              })}{' '}
+              <ErgoToken size={16} />
+            </Typography>
           </CardContent>
         </Card>
-        <Card className="w-64">
+        <Card className="flex w-64 items-center justify-center">
           <CardContent className="text-center">
             <Typography variant="h6" component="div">
               Circulating
@@ -72,26 +69,16 @@ const HomePage = async () => {
         </Card>
       </div>
 
-      <TableContainer className="mt-4">
-        <Table size="small" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Num Coins To Auction</TableCell>
-              <TableCell>Period</TableCell>
-              <TableCell>Coef</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.auctionList.map((row) => (
-              <TableRow key={row.numCoinsToAuction}>
-                <TableCell>{row.numCoinsToAuction}</TableCell>
-                <TableCell>{row.period}</TableCell>
-                <TableCell>{row.coef}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <div className="grid w-full grid-cols-2 gap-8">
+        <UpcomingAuctions
+          auctionList={data?.auctionList}
+          currentPrice={data?.curPrice}
+        />
+        <UpcomingAuctions
+          auctionList={data?.auctionList}
+          currentPrice={data?.curPrice}
+        />
+      </div>
     </main>
   );
 };
