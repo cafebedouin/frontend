@@ -27,14 +27,23 @@ const ActiveAuctionSingleRow = ({
 }: ActiveAuction) => {
   const timeLeft = useCountdown(new Date(endTime));
 
+  const periodTime =
+    timeLeft.days >= 1
+      ? timeLeft.days + (timeLeft.days > 1 ? ' days' : ' day')
+      : timeLeft.hours >= 1
+      ? timeLeft.hours + (timeLeft.hours > 1 ? ' hours' : ' hour')
+      : timeLeft.minutes >= 1
+      ? timeLeft.minutes + (timeLeft.minutes > 1 ? ' minutes' : ' minute')
+      : timeLeft.seconds + (timeLeft.seconds > 1 ? ' seconds' : ' second');
+
   return (
     <TableRow>
       <TableCell>{numberOfToken}</TableCell>
+      <TableCell>{periodTime}</TableCell>
       <TableCell>
-        {timeLeft.days} {timeLeft.days > 1 ? 'days' : 'day'}
-      </TableCell>
-      <TableCell className="flex gap-2">
-        {price.toLocaleString('en-US', { minimumFractionDigits: 3 })}
+        <span>
+          {(price / 1e9).toLocaleString('en-US', { minimumFractionDigits: 3 })}
+        </span>{' '}
         <span>ERG</span>
       </TableCell>
       <TableCell>

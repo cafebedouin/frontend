@@ -1,3 +1,6 @@
+'use client';
+import { useEffect, useState } from 'react';
+
 import { Card, CardContent } from '@mui/material';
 
 import {
@@ -7,30 +10,15 @@ import {
   ActiveAuction,
 } from '@/components/Tables';
 
-const HomePage = async () => {
-  const res = await fetch('https://api.auctioncoin.app/info');
-  const data: {
+const HomePage = () => {
+  const [data, setData] = useState<{
     nextStart: number;
     curPrice: number;
     circulating: number;
     auctionList: Array<UpcomingAuctionType>;
-  } = await res.json();
+  }>({ nextStart: 0, curPrice: 0, circulating: 0, auctionList: [] });
 
-  const activeAuctionRes = await fetch(
-    'https://ergoauctions.org/api/auctions/all/active?limit=-1&page=-1',
-    {
-      method: 'POST', // or 'PUT'
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        sort: 'lb',
-        artworkId:
-          'aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba',
-      }),
-    },
-  );
-  const activeAuction: {
+  const [activeAuction, setActiveAuction] = useState<{
     data: Array<{
       id: string;
       endTime: number;
@@ -38,7 +26,66 @@ const HomePage = async () => {
       tokenAmount: number;
     }>;
     has_more: boolean;
-  } = await activeAuctionRes.json();
+  }>({ data: [], has_more: false });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('https://api.auctioncoin.app/info');
+
+        if (!res.ok) {
+          console.error(`HTTP error! status: ${res.status}`);
+          setData({
+            nextStart: 0,
+            curPrice: 0,
+            circulating: 0,
+            auctionList: [],
+          });
+        } else {
+          const data = await res.json();
+
+          setData(data);
+        }
+      } catch (error) {
+        console.error('Error fetching auction coin info:', error);
+        setData({ nextStart: 0, curPrice: 0, circulating: 0, auctionList: [] });
+      }
+
+      try {
+        const activeAuctionRes = await fetch(
+          'https://ergoauctions.org/api/auctions/all/active?limit=-1&page=-1',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              sort: 'lb',
+              artworkId:
+                'aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba',
+            }),
+          },
+        );
+
+        if (!activeAuctionRes.ok) {
+          console.error(
+            'Error fetching active auctions:',
+            activeAuctionRes.status,
+          );
+          setActiveAuction({ data: [], has_more: false });
+        } else {
+          const activeAuctionData = await activeAuctionRes.json();
+
+          setActiveAuction(activeAuctionData);
+        }
+      } catch (error) {
+        console.error('Error fetching active auctions:', error);
+        setActiveAuction({ data: [], has_more: false });
+      }
+    };
+
+    fetchData().then(() => {});
+  }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-16 p-24">
@@ -86,7 +133,7 @@ const HomePage = async () => {
           </CardContent>
         </Card>
       </div>
-      <div className="grid w-full grid-cols-2 gap-8">
+      <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2">
         <UpcomingAuctions
           auctionList={data?.auctionList}
           currentPrice={data?.curPrice}
