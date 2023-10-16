@@ -1,8 +1,10 @@
 'use client';
 
 import { ReactNode, useContext } from 'react';
-import { ThemeContext } from '@/components/theme-registry/MuiThemeRegistry';
+
 import { Paper } from '@mui/material';
+
+import { ThemeContext } from '@/components/theme-registry/MuiThemeRegistry';
 
 const PaperWrapper = ({ children }: { children: ReactNode }) => {
   // Use context hook to access the current theme

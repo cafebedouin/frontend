@@ -1,8 +1,21 @@
 import {
-  SingleRowProps,
+  ActiveAuction,
+  ActiveAuctionsProps,
+  ActiveAuctions,
+} from './ActiveAuctions';
+import {
+  UpcomingAuctionType,
+  UpcomingAuctionSingleRowProps,
   UpcomingAuctionsProps,
   UpcomingAuctions,
 } from './UpcomingAuctions';
 
-export type { SingleRowProps, UpcomingAuctionsProps };
-export { UpcomingAuctions };
+export type {
+  UpcomingAuctionType,
+  UpcomingAuctionSingleRowProps,
+  UpcomingAuctionsProps,
+  ActiveAuction,
+  ActiveAuctionsProps,
+};
+
+export { UpcomingAuctions, ActiveAuctions };

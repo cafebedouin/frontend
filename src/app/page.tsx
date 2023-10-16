@@ -1,7 +1,12 @@
 import { Card, CardContent } from '@mui/material';
 
 import { ErgoToken } from '@/components/icons/ErgoToken';
-import { UpcomingAuctions } from '@/components/Tables';
+import {
+  UpcomingAuctions,
+  ActiveAuctions,
+  UpcomingAuctionType,
+  ActiveAuction,
+} from '@/components/Tables';
 
 const HomePage = async () => {
   const res = await fetch('https://api.auctioncoin.app/info');
@@ -9,14 +14,10 @@ const HomePage = async () => {
     nextStart: number;
     curPrice: number;
     circulating: number;
-    auctionList: Array<{
-      numCoinsToAuction: number;
-      period: number;
-      coef: number;
-    }>;
+    auctionList: Array<UpcomingAuctionType>;
   } = await res.json();
 
-  /*const activeAuctionRes = await fetch(
+  const activeAuctionRes = await fetch(
     'https://ergoauctions.org/api/auctions/all/active?limit=-1&page=-1',
     {
       method: 'POST', // or 'PUT'
@@ -30,8 +31,15 @@ const HomePage = async () => {
       }),
     },
   );
-  const activeAuction: { data: Array<unknown>; has_more: boolean } =
-    await activeAuctionRes.json();*/
+  const activeAuction: {
+    data: Array<{
+      id: string;
+      endTime: number;
+      price: number;
+      tokenAmount: number;
+    }>;
+    has_more: boolean;
+  } = await activeAuctionRes.json();
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-5 p-24">
@@ -68,9 +76,15 @@ const HomePage = async () => {
           auctionList={data?.auctionList}
           currentPrice={data?.curPrice}
         />
-        <UpcomingAuctions
-          auctionList={data?.auctionList}
-          currentPrice={data?.curPrice}
+        <ActiveAuctions
+          auctions={activeAuction?.data?.map<ActiveAuction>((auction) => {
+            return {
+              auctionId: auction?.id,
+              endTime: auction?.endTime,
+              price: auction?.price,
+              numberOfToken: auction?.tokenAmount,
+            };
+          })}
         />
       </div>
     </main>

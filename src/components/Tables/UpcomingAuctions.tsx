@@ -15,16 +15,16 @@ export type UpcomingAuctionType = {
   coef: number;
 };
 
-export interface SingleRowProps extends UpcomingAuctionType {
+export interface UpcomingAuctionSingleRowProps extends UpcomingAuctionType {
   currentPrice: number;
 }
 
-const SingleRow = ({
+const UpcomingAuctionSingleRow = ({
   currentPrice,
   numCoinsToAuction,
   period,
   coef,
-}: SingleRowProps) => {
+}: UpcomingAuctionSingleRowProps) => {
   const periodTime = Math.floor(period / (60 * 60 * 24));
   const price = (1e3 * coef * numCoinsToAuction * currentPrice) / 1e9;
 
@@ -43,7 +43,7 @@ const SingleRow = ({
 };
 
 export interface UpcomingAuctionsProps
-  extends Pick<SingleRowProps, 'currentPrice'> {
+  extends Pick<UpcomingAuctionSingleRowProps, 'currentPrice'> {
   auctionList: Array<UpcomingAuctionType>;
 }
 
@@ -67,7 +67,7 @@ const UpcomingAuctions = ({
           </TableHead>
           <TableBody>
             {auctionList.map((row, index) => (
-              <SingleRow
+              <UpcomingAuctionSingleRow
                 key={index}
                 currentPrice={currentPrice}
                 numCoinsToAuction={row.numCoinsToAuction}

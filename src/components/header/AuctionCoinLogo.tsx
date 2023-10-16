@@ -9,8 +9,8 @@ const AuctionCoinLogo = () => {
           <Image
             src="/logo/logo-color.png"
             alt="auction coin logo"
-            width={140}
-            height={28}
+            width={152}
+            height={36}
           />
         </figure>
       </div>

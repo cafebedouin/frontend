@@ -1,5 +1,4 @@
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { Alert } from '@mui/material';
 
 export default function Custom500() {
   return (
