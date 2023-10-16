@@ -1,5 +1,3 @@
-import React from 'react';
-
 import LaunchIcon from '@mui/icons-material/Launch';
 import {
   Table,
@@ -51,7 +49,10 @@ const ActiveAuctionSingleRow = ({
           href={`https://ergoauctions.org/artwork/aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba?auction=${auctionId}`}
           target="_blank"
         >
-          <LaunchIcon className="text-[1rem] text-secondary" fontSize="small" />
+          <LaunchIcon
+            className="text-[1rem] text-secondary dark:text-secondary-dark"
+            fontSize="small"
+          />
         </a>
       </TableCell>
     </TableRow>
@@ -79,19 +80,26 @@ const ActiveAuctions = ({ auctions }: ActiveAuctionsProps) => {
               <TableCell>Link</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {auctions.map((row, index) => (
-              <ActiveAuctionSingleRow
-                key={index}
-                auctionId={row?.auctionId}
-                numberOfToken={row.numberOfToken}
-                endTime={row.endTime}
-                price={row.price}
-              />
-            ))}
-          </TableBody>
+          {auctions.length > 0 && (
+            <TableBody>
+              {auctions.map((row, index) => (
+                <ActiveAuctionSingleRow
+                  key={index}
+                  auctionId={row?.auctionId}
+                  numberOfToken={row.numberOfToken}
+                  endTime={row.endTime}
+                  price={row.price}
+                />
+              ))}
+            </TableBody>
+          )}
         </Table>
       </TableContainer>
+      {!auctions.length && (
+        <p className="my-3 text-center text-title-medium">
+          No Active Auctions Currently
+        </p>
+      )}
     </div>
   );
 };

@@ -11,7 +11,7 @@ import { Qiucksand } from '@/font';
 export const metadata: Metadata = {
   title: 'Auction Coin',
   description: 'Auction Coin',
-  icons: ['/favicon/favicon-color.png'],
+  icons: ['/logo.svg'],
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

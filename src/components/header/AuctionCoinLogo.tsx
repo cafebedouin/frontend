@@ -7,10 +7,10 @@ const AuctionCoinLogo = () => {
       <div>
         <figure className="m-auto flex items-center justify-center">
           <Image
-            src="/logo/logo-color.png"
+            src="/logo.svg"
             alt="auction coin logo"
-            width={152}
-            height={36}
+            width={80}
+            height={80}
           />
         </figure>
       </div>

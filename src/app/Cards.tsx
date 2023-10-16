@@ -1,5 +1,3 @@
-import React from 'react';
-
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { Card, CardContent, Skeleton } from '@mui/material';
 
@@ -25,8 +23,11 @@ const Cards = ({
   const startRemainTime = useCountdown(new Date(nextStart));
 
   return (
-    <div className="flex h-36 flex-row justify-around gap-6">
-      <Card elevation={4} className="flex w-64 items-center justify-center">
+    <div className="flex flex-row flex-wrap justify-around gap-6">
+      <Card
+        elevation={4}
+        className="flex h-36 w-64 items-center justify-center"
+      >
         <CardContent className="text-center">
           <h6>Next Start</h6>
           <div className="text-title-medium">
@@ -41,18 +42,20 @@ const Cards = ({
           </div>
         </CardContent>
       </Card>
-      <Card elevation={4} className="flex w-64 items-center justify-center">
+      <Card
+        elevation={4}
+        className="flex h-36 w-64 items-center justify-center"
+      >
         <CardContent className="text-center">
-          <h6 className="flex gap-0.5">
-            Current Price
-            <a
-              className="flex items-start self-start text-secondary"
-              href="https://app.spectrum.fi/ergo/swap?base=0000000000000000000000000000000000000000000000000000000000000000&quote=aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba&initialPoolId=915da2ac421906919351163a9afa1f17918272750987906b00247e91925e757d"
-              target="_blank"
-            >
-              <ArrowOutwardIcon className="text-[1rem]" />
-            </a>
-          </h6>
+          <h6>Current Price</h6>
+          <a
+            className="flex justify-center text-body-medium text-secondary hover:opacity-70 dark:text-secondary-dark"
+            href="https://app.spectrum.fi/ergo/swap?base=0000000000000000000000000000000000000000000000000000000000000000&quote=aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba&initialPoolId=915da2ac421906919351163a9afa1f17918272750987906b00247e91925e757d"
+            target="_blank"
+          >
+            [buy AuctionCoin]
+            <ArrowOutwardIcon className="self-start text-[0.75rem]" />
+          </a>
           <div className="flex items-center justify-center gap-2 text-title-medium">
             {!curPrice ? (
               <Skeleton
@@ -70,7 +73,10 @@ const Cards = ({
           </div>
         </CardContent>
       </Card>
-      <Card elevation={4} className="flex w-64 items-center justify-center">
+      <Card
+        elevation={4}
+        className="flex h-36 w-64 items-center justify-center"
+      >
         <CardContent className="text-center">
           <h6>Circulating</h6>
           <div className="flex items-center gap-2 text-title-medium">
