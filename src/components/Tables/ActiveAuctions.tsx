@@ -49,8 +49,9 @@ const ActiveAuctionSingleRow = ({
       <TableCell>
         <a
           href={`https://ergoauctions.org/artwork/aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba?auction=${auctionId}`}
+          target="_blank"
         >
-          <LaunchIcon />
+          <LaunchIcon className="text-[1rem] text-secondary" fontSize="small" />
         </a>
       </TableCell>
     </TableRow>

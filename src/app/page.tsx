@@ -1,8 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-import { Card, CardContent } from '@mui/material';
-
+import { Cards } from '@/app/Cards';
 import {
   UpcomingAuctions,
   ActiveAuctions,
@@ -30,58 +29,61 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const res = await fetch('https://api.auctioncoin.app/info');
+      const fetchInfo = fetch('https://api.auctioncoin.app/info').then(
+        (res) => {
+          if (!res.ok) {
+            console.error(`HTTP error! status: ${res.status}`);
 
+            return {
+              nextStart: 0,
+              curPrice: 0,
+              circulating: 0,
+              auctionList: [],
+            };
+          }
+
+          return res.json();
+        },
+      );
+
+      const fetchActiveAuctions = fetch(
+        'https://ergoauctions.org/api/auctions/all/active?limit=-1&page=-1',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sort: 'lb',
+            artworkId:
+              'aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba',
+          }),
+        },
+      ).then((res) => {
         if (!res.ok) {
-          console.error(`HTTP error! status: ${res.status}`);
+          console.error('Error fetching active auctions:', res.status);
+
+          return { data: [], has_more: false };
+        }
+
+        return res.json();
+      });
+
+      Promise.all([fetchInfo, fetchActiveAuctions])
+        .then(([data, activeAuctionData]) => {
+          setData(data);
+          setActiveAuction(activeAuctionData);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
           setData({
             nextStart: 0,
             curPrice: 0,
             circulating: 0,
             auctionList: [],
           });
-        } else {
-          const data = await res.json();
-
-          setData(data);
-        }
-      } catch (error) {
-        console.error('Error fetching auction coin info:', error);
-        setData({ nextStart: 0, curPrice: 0, circulating: 0, auctionList: [] });
-      }
-
-      try {
-        const activeAuctionRes = await fetch(
-          'https://ergoauctions.org/api/auctions/all/active?limit=-1&page=-1',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              sort: 'lb',
-              artworkId:
-                'aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba',
-            }),
-          },
-        );
-
-        if (!activeAuctionRes.ok) {
-          console.error(
-            'Error fetching active auctions:',
-            activeAuctionRes.status,
-          );
           setActiveAuction({ data: [], has_more: false });
-        } else {
-          const activeAuctionData = await activeAuctionRes.json();
-
-          setActiveAuction(activeAuctionData);
-        }
-      } catch (error) {
-        console.error('Error fetching active auctions:', error);
-        setActiveAuction({ data: [], has_more: false });
-      }
+        });
     };
 
     fetchData().then(() => {});
@@ -106,33 +108,11 @@ const HomePage = () => {
           </a>
         </p>
       </div>
-      <div className="flex h-36 flex-row justify-around gap-6">
-        <Card elevation={4} className="flex w-64 items-center justify-center">
-          <CardContent className="text-center">
-            <h6>Next Start</h6>
-            <div className="text-title-medium">
-              {new Date(data.nextStart).toDateString()}
-            </div>
-          </CardContent>
-        </Card>
-        <Card elevation={4} className="flex w-64 items-center justify-center">
-          <CardContent className="text-center">
-            <h6>Current Price</h6>
-            <div className="flex items-center gap-2 text-title-medium">
-              {data.curPrice.toLocaleString('en-US', {
-                minimumFractionDigits: 3,
-              })}
-              <span>ERG</span>
-            </div>
-          </CardContent>
-        </Card>
-        <Card elevation={4} className="flex w-64 items-center justify-center">
-          <CardContent className="text-center">
-            <h6>Circulating</h6>
-            <div className="text-title-medium">{data.circulating}</div>
-          </CardContent>
-        </Card>
-      </div>
+      <Cards
+        nextStart={data.nextStart}
+        curPrice={data.curPrice}
+        circulating={data.circulating}
+      />
       <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2">
         <UpcomingAuctions
           auctionList={data?.auctionList}

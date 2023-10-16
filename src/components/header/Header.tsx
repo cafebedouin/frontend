@@ -10,7 +10,7 @@ const Header = () => {
       component="header"
       square
       elevation={4}
-      className="sticky left-0 right-0 top-0 z-20"
+      className="sticky left-0 right-0 top-0 z-20 bg-primary"
     >
       <Toolbar
         component="nav"
