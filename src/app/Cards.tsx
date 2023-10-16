@@ -29,7 +29,7 @@ const Cards = ({
         className="flex h-36 w-64 items-center justify-center"
       >
         <CardContent className="text-center">
-          <h6>Next Start</h6>
+          <h6 className="mb-2">Next Auctions Start Time</h6>
           <div className="text-title-medium">
             {!nextStart ? (
               <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
@@ -47,7 +47,7 @@ const Cards = ({
         className="flex h-36 w-64 items-center justify-center"
       >
         <CardContent className="text-center">
-          <h6>Current Price</h6>
+          <h6 className="mb-2">Current Price</h6>
           <div className="flex items-center justify-center gap-2 text-title-medium">
             {!curPrice ? (
               <Skeleton
@@ -78,7 +78,7 @@ const Cards = ({
         className="flex h-36 w-64 items-center justify-center"
       >
         <CardContent className="text-center">
-          <h6>Circulating</h6>
+          <h6 className="mb-2">Circulating</h6>
           <div className="flex items-center gap-2 text-title-medium">
             {!circulating ? (
               <Skeleton
