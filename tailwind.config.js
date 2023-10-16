@@ -50,6 +50,8 @@ module.exports = {
       ...colors,
     },
     extend: {
+      animation: {},
+      keyframes: {},
       fontSize: {
         'display-large': ['3.5625rem', { fontWeight: 400, lineHeight: '4rem' }],
         'display-medium': [
