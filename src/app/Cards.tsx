@@ -48,14 +48,6 @@ const Cards = ({
       >
         <CardContent className="text-center">
           <h6>Current Price</h6>
-          <a
-            className="flex justify-center text-body-medium text-secondary hover:opacity-70 dark:text-secondary-dark"
-            href="https://app.spectrum.fi/ergo/swap?base=0000000000000000000000000000000000000000000000000000000000000000&quote=aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba&initialPoolId=915da2ac421906919351163a9afa1f17918272750987906b00247e91925e757d"
-            target="_blank"
-          >
-            [buy AuctionCoin]
-            <ArrowOutwardIcon className="self-start text-[0.75rem]" />
-          </a>
           <div className="flex items-center justify-center gap-2 text-title-medium">
             {!curPrice ? (
               <Skeleton
@@ -71,6 +63,14 @@ const Cards = ({
               </>
             )}
           </div>
+          <a
+            className="flex justify-center text-body-medium text-secondary hover:opacity-70 dark:text-secondary-dark"
+            href="https://app.spectrum.fi/ergo/swap?base=0000000000000000000000000000000000000000000000000000000000000000&quote=aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba&initialPoolId=915da2ac421906919351163a9afa1f17918272750987906b00247e91925e757d"
+            target="_blank"
+          >
+            [buy AuctionCoin]
+            <ArrowOutwardIcon className="self-start text-[0.75rem]" />
+          </a>
         </CardContent>
       </Card>
       <Card

@@ -88,10 +88,14 @@ const HomePage = () => {
     };
 
     fetchData().then(() => {});
+
+    const intervalId = setInterval(fetchData, 30000); // Call fetchData every 30 seconds
+
+    return () => clearInterval(intervalId); // Clean up the interval on component unmount
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center gap-16 p-24">
+    <main className="flex min-h-screen flex-col items-center gap-16 p-12 sm:p-24">
       <Hero />
       <Cards
         nextStart={data.nextStart}

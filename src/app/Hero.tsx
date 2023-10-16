@@ -8,7 +8,7 @@ const Hero = () => {
         height={400}
         alt="logo"
         src="/logo.svg"
-        className="absolute -left-40 -top-12 opacity-20"
+        className="absolute -left-32 -top-12 opacity-20"
       />
       <h2 className="z-[2] flex flex-col text-6xl font-bold">
         <span>The</span>
