@@ -10,7 +10,6 @@ import {
   TableRow,
 } from '@mui/material';
 
-import { ErgoToken } from '@/components/icons/ErgoToken';
 import { useCountdown } from '@/hooks/useCountdown';
 
 export type ActiveAuction = {
@@ -36,7 +35,7 @@ const ActiveAuctionSingleRow = ({
       </TableCell>
       <TableCell className="flex gap-2">
         {price.toLocaleString('en-US', { minimumFractionDigits: 3 })}
-        <ErgoToken size={16} />
+        <span>ERG</span>
       </TableCell>
       <TableCell>
         <a
@@ -66,7 +65,7 @@ const ActiveAuctions = ({ auctions }: ActiveAuctionsProps) => {
             <TableRow>
               <TableCell>Number of AuctionCoins</TableCell>
               <TableCell>Remaining Time</TableCell>
-              <TableCell>Price</TableCell>
+              <TableCell>Current Price</TableCell>
               <TableCell>Link</TableCell>
             </TableRow>
           </TableHead>

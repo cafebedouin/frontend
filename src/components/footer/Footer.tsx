@@ -14,10 +14,13 @@ const Footer = () => {
           Whitepaper
         </a>
         <div className="flex gap-3">
-          <a href="/">
+          <a href="https://twitter.com/Auction_Coin" target="_blank">
             <TwitterIcon className="hover:text-gray-300" />
           </a>
-          <a href="/">
+          <a
+            href="https://github.com/orgs/Auction-Coin/repositories"
+            target="_blank"
+          >
             <GitHubIcon className="hover:text-gray-300" />
           </a>
         </div>

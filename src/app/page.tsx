@@ -1,6 +1,5 @@
 import { Card, CardContent } from '@mui/material';
 
-import { ErgoToken } from '@/components/icons/ErgoToken';
 import {
   UpcomingAuctions,
   ActiveAuctions,
@@ -76,7 +75,7 @@ const HomePage = async () => {
               {data.curPrice.toLocaleString('en-US', {
                 minimumFractionDigits: 3,
               })}
-              <ErgoToken size={16} />
+              <span>ERG</span>
             </div>
           </CardContent>
         </Card>
