@@ -40,7 +40,7 @@ const UpcomingAuctionSingleRow = ({
 
   return (
     <TableRow>
-      <TableCell>{numCoinsToAuction}</TableCell>
+      <TableCell>{numCoinsToAuction} AuctionCoins</TableCell>
       <TableCell>{periodTime}</TableCell>
       <TableCell className="flex gap-2">
         {price.toLocaleString('en-US', { minimumFractionDigits: 3 })}
@@ -68,7 +68,7 @@ const UpcomingAuctions = ({
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>Number of AuctionCoins</TableCell>
+              <TableCell>Quantity</TableCell>
               <TableCell>Period</TableCell>
               <TableCell>Start Price</TableCell>
             </TableRow>

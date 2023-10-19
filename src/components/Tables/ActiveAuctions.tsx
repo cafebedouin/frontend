@@ -36,7 +36,7 @@ const ActiveAuctionSingleRow = ({
 
   return (
     <TableRow>
-      <TableCell>{numberOfToken}</TableCell>
+      <TableCell>{numberOfToken} AuctionCoins</TableCell>
       <TableCell>{periodTime}</TableCell>
       <TableCell>
         <span>
@@ -74,7 +74,7 @@ const ActiveAuctions = ({ auctions }: ActiveAuctionsProps) => {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>Number of AuctionCoins</TableCell>
+              <TableCell>Quantity</TableCell>
               <TableCell>Remaining Time</TableCell>
               <TableCell>Current Price</TableCell>
               <TableCell>Link</TableCell>
