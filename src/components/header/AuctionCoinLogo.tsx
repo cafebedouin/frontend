@@ -7,6 +7,7 @@ const AuctionCoinLogo = () => {
       <div>
         <figure className="m-auto flex items-center justify-center">
           <Image
+            priority
             src="/logo.svg"
             alt="auction coin logo"
             width={80}

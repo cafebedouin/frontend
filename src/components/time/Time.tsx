@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
-
 import { Box, Paper, styled } from '@mui/material';
+
+import { useCountdown, UseCountdownReturnType } from '@/hooks/useCountdown';
 
 const Wrapper = styled('ul')`
   display: grid;
@@ -21,72 +21,15 @@ const Holder = styled(Paper)`
   height: 22px;
 `;
 
-type RemainTime = {
-  day: number;
-  hour: number;
-  minute: number;
-  second: number;
-};
-
 interface TimeProps {
   date: number;
-  nodeTime: number;
   title?: boolean;
   background?: string;
   alwaysWhite?: boolean;
 }
 
-const Time = ({
-  date,
-  title = false,
-  nodeTime,
-  alwaysWhite = false,
-}: TimeProps) => {
-  const [remainTime, setRemainTime] = useState<RemainTime>({
-    day: 0,
-    hour: 0,
-    minute: 0,
-    second: 0,
-  });
-  const calculateRemainTime = (): RemainTime => {
-    const difference = date - new Date().getTime() + nodeTimeDiff;
-    let remainTime: RemainTime = {
-      day: 0,
-      hour: 0,
-      minute: 0,
-      second: 0,
-    };
-
-    if (difference > 0) {
-      remainTime = {
-        day: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hour: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minute: Math.floor((difference / 1000 / 60) % 60),
-        second: Math.floor((difference / 1000) % 60),
-      };
-    }
-
-    return remainTime;
-  };
-
-  const updateRemainTime = () => {
-    setRemainTime(calculateRemainTime());
-  };
-
-  const nodeTimeDiff = useMemo(() => {
-    return nodeTime - new Date().getTime();
-  }, [nodeTime]);
-
-  useEffect(() => {
-    setRemainTime(calculateRemainTime());
-
-    const intervalId = setInterval(updateRemainTime, 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nodeTime]);
+const Time = ({ date, title = false, alwaysWhite = false }: TimeProps) => {
+  const countDown = useCountdown(new Date(date));
 
   const getSign = (key: string) => {
     switch (key) {
@@ -104,7 +47,7 @@ const Time = ({
 
   return (
     <Wrapper>
-      {Object.keys(remainTime).map((key) => {
+      {Object.keys(countDown).map((key) => {
         return (
           <Box
             component="li"
@@ -119,7 +62,9 @@ const Time = ({
           >
             <div className="flex flex-col items-center">
               <Holder className="fs-m">
-                {String(remainTime[key as keyof RemainTime]).padStart(2, '0')}
+                {String(
+                  countDown[key as keyof UseCountdownReturnType],
+                ).padStart(2, '0')}
               </Holder>
               {title && (
                 <span

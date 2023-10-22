@@ -26,13 +26,13 @@ const ActiveAuctionSingleRow = ({
   const timeLeft = useCountdown(new Date(endTime));
 
   const periodTime =
-    timeLeft.days >= 1
-      ? timeLeft.days + (timeLeft.days > 1 ? ' days' : ' day')
-      : timeLeft.hours >= 1
-      ? timeLeft.hours + (timeLeft.hours > 1 ? ' hours' : ' hour')
-      : timeLeft.minutes >= 1
-      ? timeLeft.minutes + (timeLeft.minutes > 1 ? ' minutes' : ' minute')
-      : timeLeft.seconds + (timeLeft.seconds > 1 ? ' seconds' : ' second');
+    timeLeft.day >= 1
+      ? timeLeft.day + (timeLeft.day > 1 ? ' days' : ' day')
+      : timeLeft.hour >= 1
+      ? timeLeft.hour + (timeLeft.hour > 1 ? ' hours' : ' hour')
+      : timeLeft.minute >= 1
+      ? timeLeft.minute + (timeLeft.minute > 1 ? ' minutes' : ' minute')
+      : timeLeft.second + (timeLeft.second > 1 ? ' seconds' : ' second');
 
   return (
     <TableRow>

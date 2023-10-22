@@ -2,28 +2,28 @@
 import { useState, useEffect, useCallback } from 'react';
 
 export type UseCountdownReturnType = {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
+  day: number;
+  hour: number;
+  minute: number;
+  second: number;
 };
 
 const useCountdown = (targetDate: Date): UseCountdownReturnType => {
   const calculateTimeLeft = useCallback((): UseCountdownReturnType => {
     const difference = +new Date(targetDate) - +new Date();
     let timeLeft: UseCountdownReturnType = {
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
+      day: 0,
+      hour: 0,
+      minute: 0,
+      second: 0,
     };
 
     if (difference > 0) {
       timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
+        day: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hour: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minute: Math.floor((difference / 1000 / 60) % 60),
+        second: Math.floor((difference / 1000) % 60),
       };
     }
 
@@ -46,7 +46,7 @@ const useCountdown = (targetDate: Date): UseCountdownReturnType => {
   return timeLeft;
 };
 
-const getLeftTime = (time: UseCountdownReturnType): string => {
+/*const getLeftTime = (time: UseCountdownReturnType): string => {
   return time.days >= 1
     ? time.days + (time.days > 1 ? ' days' : ' day')
     : time.hours >= 1
@@ -56,6 +56,6 @@ const getLeftTime = (time: UseCountdownReturnType): string => {
     : time.seconds >= 1
     ? time.seconds + (time.seconds > 1 ? ' seconds' : ' second')
     : 'time passed';
-};
+};*/
 
-export { useCountdown, getLeftTime };
+export { useCountdown };

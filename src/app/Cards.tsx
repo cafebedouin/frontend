@@ -29,8 +29,17 @@ const Cards = ({
           <div className="flex flex-col items-center">
             {!nextStart ? (
               <>
-                <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
-                <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                <Skeleton
+                  width="100%"
+                  variant="text"
+                  sx={{ fontSize: '1rem' }}
+                />
+                <Skeleton width={32} variant="text" sx={{ fontSize: '1rem' }} />
+                <Skeleton
+                  width="100%"
+                  variant="text"
+                  sx={{ fontSize: '1rem' }}
+                />
               </>
             ) : (
               <>
@@ -38,7 +47,7 @@ const Cards = ({
                   {formatter.format(new Date(nextStart))}
                 </span>
                 <span>in</span>
-                <Time date={nextStart} nodeTime={new Date().getTime()} title />
+                <Time date={nextStart} title />
               </>
             )}
           </div>
