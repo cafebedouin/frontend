@@ -5,6 +5,7 @@ import { Box, Paper, styled } from '@mui/material';
 const Wrapper = styled('ul')`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  width: fit-content;
   gap: 0.2rem;
   align-items: center;
   margin: 0;
@@ -113,7 +114,7 @@ const Time = ({
                 marginInline: 'auto',
               },
             }}
-            className="d-flex"
+            className="flex"
             key={key}
           >
             <div className="flex flex-col items-center">
@@ -122,7 +123,7 @@ const Time = ({
               </Holder>
               {title && (
                 <span
-                  className={`text-xs font-light ${
+                  className={`text-[0.6rem] font-light ${
                     alwaysWhite ? 'text-white' : ''
                   }`}
                 >

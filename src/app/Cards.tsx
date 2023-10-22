@@ -2,7 +2,6 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { Card, CardContent, Skeleton } from '@mui/material';
 
 import { Time } from '@/components/time';
-import { getLeftTime, useCountdown } from '@/hooks/useCountdown';
 
 const Cards = ({
   nextStart,
@@ -21,29 +20,31 @@ const Cards = ({
     hour: '2-digit',
     minute: '2-digit',
   });
-  const startRemainTime = useCountdown(new Date(nextStart));
 
   return (
     <div className="flex flex-row flex-wrap justify-around gap-6">
-      <Card elevation={4} className="flex h-36 w-64 justify-center">
+      <Card elevation={4} className="flex h-40 w-64 justify-center">
         <CardContent className="text-center">
           <h6 className="mb-2">Next Auctions Start Time</h6>
-          <div>
+          <div className="flex flex-col items-center">
             {!nextStart ? (
-              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+              <>
+                <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+              </>
             ) : (
-              <div className="flex flex-col text-center">
-                <span className="text-title-medium">
+              <>
+                <span className="text-center text-title-medium">
                   {formatter.format(new Date(nextStart))}
                 </span>
-                <span>{getLeftTime(startRemainTime)}</span>
+                <span>in</span>
                 <Time date={nextStart} nodeTime={new Date().getTime()} title />
-              </div>
+              </>
             )}
           </div>
         </CardContent>
       </Card>
-      <Card elevation={4} className="flex h-36 w-64 justify-center">
+      <Card elevation={4} className="flex h-40 w-64 justify-center">
         <CardContent className="text-center">
           <h6 className="mb-2">Current Price</h6>
           <div className="flex items-center justify-center gap-2 text-title-medium">
@@ -71,7 +72,7 @@ const Cards = ({
           </a>
         </CardContent>
       </Card>
-      <Card elevation={4} className="flex h-36 w-64 justify-center">
+      <Card elevation={4} className="flex h-40 w-64 justify-center">
         <CardContent className="text-center">
           <h6 className="mb-2">Circulating</h6>
           <div className="flex items-center gap-2 text-title-medium">
