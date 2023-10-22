@@ -73,7 +73,7 @@ const Cards = ({
           </div>
           <a
             className="flex justify-center text-body-medium text-secondary hover:opacity-70 dark:text-secondary-dark"
-            href="https://app.spectrum.fi/ergo/swap?base=0000000000000000000000000000000000000000000000000000000000000000&quote=aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba&initialPoolId=915da2ac421906919351163a9afa1f17918272750987906b00247e91925e757d"
+            href="https://app.spectrum.fi/ergo/swap?base=0000000000000000000000000000000000000000000000000000000000000000&quote=52f4544ce8a420d484ece16f9b984d81c23e46971ef5e37c29382ac50f80d5bd"
             target="_blank"
           >
             [buy AuctionCoin]
