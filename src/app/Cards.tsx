@@ -64,6 +64,7 @@ const Cards = ({
               />
             ) : (
               <>
+                <span>1 AuctionCoin = </span>
                 {(curPrice / 1e9).toLocaleString('en-US', {
                   minimumFractionDigits: 3,
                 })}
