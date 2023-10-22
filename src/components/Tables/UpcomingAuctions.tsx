@@ -42,8 +42,8 @@ const UpcomingAuctionSingleRow = ({
     <TableRow>
       <TableCell>{numCoinsToAuction} AuctionCoins</TableCell>
       <TableCell>{periodTime}</TableCell>
-      <TableCell className="flex gap-2">
-        {price.toLocaleString('en-US', { minimumFractionDigits: 3 })}
+      <TableCell>
+        {price.toLocaleString('en-US', { minimumFractionDigits: 3 })}{' '}
         <span>ERG</span>
       </TableCell>
     </TableRow>
