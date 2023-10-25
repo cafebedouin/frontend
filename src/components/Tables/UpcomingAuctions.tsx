@@ -7,6 +7,10 @@ import {
   TableRow,
 } from '@mui/material';
 
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from '@/components/Tables/StyledTable';
 import { getLeftTime } from '@/hooks/useCountdown';
 
 export type UpcomingAuctionType = {
@@ -33,10 +37,12 @@ const UpcomingAuctionSingleRow = ({
   const price = ((1e3 / coef) * numCoinsToAuction * currentPrice) / 1e9;
 
   return (
-    <TableRow>
-      <TableCell>{numCoinsToAuction} AuctionCoins</TableCell>
-      <TableCell>{getLeftTime({ day, hour, minute, second })}</TableCell>
-      <TableCell>
+    <StyledTableRow>
+      <StyledTableCell>{numCoinsToAuction} AuctionCoins</StyledTableCell>
+      <StyledTableCell>
+        {getLeftTime({ day, hour, minute, second })}
+      </StyledTableCell>
+      <StyledTableCell>
         {price.toLocaleString('en-US', { minimumFractionDigits: 3 })}{' '}
         <span>ERG </span>
         <span>
@@ -46,8 +52,8 @@ const UpcomingAuctionSingleRow = ({
           })}{' '}
           per AC)
         </span>
-      </TableCell>
-    </TableRow>
+      </StyledTableCell>
+    </StyledTableRow>
   );
 };
 

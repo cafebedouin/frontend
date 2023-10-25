@@ -8,6 +8,10 @@ import {
   TableRow,
 } from '@mui/material';
 
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from '@/components/Tables/StyledTable';
 import { getLeftTime, useCountdown } from '@/hooks/useCountdown';
 
 export type ActiveAuction = {
@@ -26,10 +30,10 @@ const ActiveAuctionSingleRow = ({
   const timeLeft = useCountdown(new Date(endTime));
 
   return (
-    <TableRow>
-      <TableCell>{numberOfToken} AuctionCoins</TableCell>
-      <TableCell>{getLeftTime(timeLeft)}</TableCell>
-      <TableCell>
+    <StyledTableRow>
+      <StyledTableCell>{numberOfToken} AuctionCoins</StyledTableCell>
+      <StyledTableCell>{getLeftTime(timeLeft)}</StyledTableCell>
+      <StyledTableCell>
         <span>
           {(price / 1e9).toLocaleString('en-US', { minimumFractionDigits: 3 })}
         </span>{' '}
@@ -41,8 +45,8 @@ const ActiveAuctionSingleRow = ({
           })}{' '}
           per AC)
         </span>
-      </TableCell>
-      <TableCell>
+      </StyledTableCell>
+      <StyledTableCell>
         <a
           href={`https://ergoauctions.org/artwork/52f4544ce8a420d484ece16f9b984d81c23e46971ef5e37c29382ac50f80d5bd?auction=${auctionId}`}
           target="_blank"
@@ -52,8 +56,8 @@ const ActiveAuctionSingleRow = ({
             fontSize="small"
           />
         </a>
-      </TableCell>
-    </TableRow>
+      </StyledTableCell>
+    </StyledTableRow>
   );
 };
 
