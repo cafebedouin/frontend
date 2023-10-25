@@ -57,7 +57,7 @@ const HomePage = () => {
           body: JSON.stringify({
             sort: 'lb',
             artworkId:
-              'aee8132a6602dd215dac8d1caf973581277614e267702a770f45d7ffe5234cba',
+              '52f4544ce8a420d484ece16f9b984d81c23e46971ef5e37c29382ac50f80d5bd',
           }),
         },
       ).then((res) => {
