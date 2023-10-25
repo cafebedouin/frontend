@@ -46,16 +46,16 @@ const useCountdown = (targetDate: Date): UseCountdownReturnType => {
   return timeLeft;
 };
 
-/*const getLeftTime = (time: UseCountdownReturnType): string => {
-  return time.days >= 1
-    ? time.days + (time.days > 1 ? ' days' : ' day')
-    : time.hours >= 1
-    ? time.hours + (time.hours > 1 ? ' hours' : ' hour')
-    : time.minutes >= 1
-    ? time.minutes + (time.minutes > 1 ? ' minutes' : ' minute')
-    : time.seconds >= 1
-    ? time.seconds + (time.seconds > 1 ? ' seconds' : ' second')
+const getLeftTime = (time: UseCountdownReturnType): string => {
+  return time.day >= 1
+    ? time.day + (time.day > 1 ? ' days' : ' day')
+    : time.hour >= 1
+    ? time.hour + (time.hour > 1 ? ' hours' : ' hour')
+    : time.minute >= 1
+    ? time.minute + (time.minute > 1 ? ' minutes' : ' minute')
+    : time.second >= 1
+    ? time.second + (time.second > 1 ? ' seconds' : ' second')
     : 'time passed';
-};*/
+};
 
-export { useCountdown };
+export { useCountdown, getLeftTime };

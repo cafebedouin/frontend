@@ -8,7 +8,7 @@ import {
   TableRow,
 } from '@mui/material';
 
-import { useCountdown } from '@/hooks/useCountdown';
+import { getLeftTime, useCountdown } from '@/hooks/useCountdown';
 
 export type ActiveAuction = {
   auctionId: string;
@@ -25,24 +25,22 @@ const ActiveAuctionSingleRow = ({
 }: ActiveAuction) => {
   const timeLeft = useCountdown(new Date(endTime));
 
-  const periodTime =
-    timeLeft.day >= 1
-      ? timeLeft.day + (timeLeft.day > 1 ? ' days' : ' day')
-      : timeLeft.hour >= 1
-      ? timeLeft.hour + (timeLeft.hour > 1 ? ' hours' : ' hour')
-      : timeLeft.minute >= 1
-      ? timeLeft.minute + (timeLeft.minute > 1 ? ' minutes' : ' minute')
-      : timeLeft.second + (timeLeft.second > 1 ? ' seconds' : ' second');
-
   return (
     <TableRow>
       <TableCell>{numberOfToken} AuctionCoins</TableCell>
-      <TableCell>{periodTime}</TableCell>
+      <TableCell>{getLeftTime(timeLeft)}</TableCell>
       <TableCell>
         <span>
           {(price / 1e9).toLocaleString('en-US', { minimumFractionDigits: 3 })}
         </span>{' '}
-        <span>ERG</span>
+        <span>ERG </span>
+        <span>
+          (
+          {(price / 1e9 / numberOfToken).toLocaleString('en-US', {
+            minimumFractionDigits: 3,
+          })}{' '}
+          per AC)
+        </span>
       </TableCell>
       <TableCell>
         <a
@@ -71,7 +69,7 @@ const ActiveAuctions = ({ auctions }: ActiveAuctionsProps) => {
       </h3>
 
       <TableContainer className="mt-4">
-        <Table size="small">
+        <Table className="min-w-[650px] md:min-w-full" size="small">
           <TableHead>
             <TableRow>
               <TableCell>Quantity</TableCell>
@@ -82,15 +80,19 @@ const ActiveAuctions = ({ auctions }: ActiveAuctionsProps) => {
           </TableHead>
           {auctions.length > 0 && (
             <TableBody>
-              {auctions.map((row, index) => (
-                <ActiveAuctionSingleRow
-                  key={index}
-                  auctionId={row?.auctionId}
-                  numberOfToken={row.numberOfToken}
-                  endTime={row.endTime}
-                  price={row.price}
-                />
-              ))}
+              {auctions
+                .sort((a, b) => {
+                  return b.numberOfToken - a.numberOfToken;
+                })
+                .map((row, index) => (
+                  <ActiveAuctionSingleRow
+                    key={index}
+                    auctionId={row?.auctionId}
+                    numberOfToken={row.numberOfToken}
+                    endTime={row.endTime}
+                    price={row.price}
+                  />
+                ))}
             </TableBody>
           )}
         </Table>

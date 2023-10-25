@@ -10,13 +10,20 @@ import {
   ActiveAuction,
 } from '@/components/Tables';
 
+export type MainData = {
+  nextStart: number;
+  curPrice: number;
+  circulating: number;
+  auctionList: Array<UpcomingAuctionType>;
+};
+
 const HomePage = () => {
-  const [data, setData] = useState<{
-    nextStart: number;
-    curPrice: number;
-    circulating: number;
-    auctionList: Array<UpcomingAuctionType>;
-  }>({ nextStart: 0, curPrice: 0, circulating: 0, auctionList: [] });
+  const [data, setData] = useState<MainData>({
+    nextStart: 0,
+    curPrice: 0,
+    circulating: 0,
+    auctionList: [],
+  });
 
   const [activeAuction, setActiveAuction] = useState<{
     data: Array<{

@@ -7,6 +7,8 @@ import {
   TableRow,
 } from '@mui/material';
 
+import { getLeftTime } from '@/hooks/useCountdown';
+
 export type UpcomingAuctionType = {
   numCoinsToAuction: number;
   period: number;
@@ -23,28 +25,27 @@ const UpcomingAuctionSingleRow = ({
   period,
   coef,
 }: UpcomingAuctionSingleRowProps) => {
-  const seconds = period / 1e3;
-  const minutes = seconds / 60;
-  const hours = minutes / 60;
-  const days = hours / 24;
+  const second = period / 1e3;
+  const minute = second / 60;
+  const hour = minute / 60;
+  const day = hour / 24;
 
-  const periodTime =
-    days >= 1
-      ? days + (days > 1 ? ' days' : ' day')
-      : hours >= 1
-      ? hours + (hours > 1 ? ' hours' : ' hour')
-      : minutes >= 1
-      ? minutes + (minutes > 1 ? ' minutes' : ' minute')
-      : seconds + (seconds > 1 ? ' seconds' : ' second');
   const price = ((1e3 / coef) * numCoinsToAuction * currentPrice) / 1e9;
 
   return (
     <TableRow>
       <TableCell>{numCoinsToAuction} AuctionCoins</TableCell>
-      <TableCell>{periodTime}</TableCell>
+      <TableCell>{getLeftTime({ day, hour, minute, second })}</TableCell>
       <TableCell>
         {price.toLocaleString('en-US', { minimumFractionDigits: 3 })}{' '}
-        <span>ERG</span>
+        <span>ERG </span>
+        <span>
+          (
+          {(price / numCoinsToAuction).toLocaleString('en-US', {
+            minimumFractionDigits: 3,
+          })}{' '}
+          per AC)
+        </span>
       </TableCell>
     </TableRow>
   );
@@ -65,7 +66,7 @@ const UpcomingAuctions = ({
         Upcoming Auctions
       </h3>
       <TableContainer className="mt-4">
-        <Table size="small">
+        <Table className="min-w-[650px] md:min-w-full" size="small">
           <TableHead>
             <TableRow>
               <TableCell>Quantity</TableCell>
@@ -74,15 +75,19 @@ const UpcomingAuctions = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {auctionList.map((row, index) => (
-              <UpcomingAuctionSingleRow
-                key={index}
-                currentPrice={currentPrice}
-                numCoinsToAuction={row.numCoinsToAuction}
-                period={row.period}
-                coef={row.coef}
-              />
-            ))}
+            {auctionList
+              .sort((a, b) => {
+                return b.numCoinsToAuction - a.numCoinsToAuction;
+              })
+              .map((row, index) => (
+                <UpcomingAuctionSingleRow
+                  key={index}
+                  currentPrice={currentPrice}
+                  numCoinsToAuction={row.numCoinsToAuction}
+                  period={row.period}
+                  coef={row.coef}
+                />
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
