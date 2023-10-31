@@ -4,6 +4,7 @@ const Hero = () => {
   return (
     <div className="relative mx-auto grid grid-cols-1 gap-8 md:grid-cols-2 lg:w-8/12">
       <Image
+        priority
         width={400}
         height={400}
         alt="logo"

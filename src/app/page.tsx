@@ -37,22 +37,15 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchInfo = fetch('https://api.auctioncoin.app/info').then(
-        (res) => {
-          if (!res.ok) {
-            console.error(`HTTP error! status: ${res.status}`);
+      const fetchInfo: Promise<MainData> = fetch(
+        'https://api.auctioncoin.app/info',
+      ).then((res) => {
+        if (!res.ok) {
+          throw Error(`HTTP error! status: ${res.status}`);
+        }
 
-            return {
-              nextStart: 0,
-              curPrice: 0,
-              circulating: 0,
-              auctionList: [],
-            };
-          }
-
-          return res.json();
-        },
-      );
+        return res.json();
+      });
 
       const fetchActiveAuctions = fetch(
         'https://ergoauctions.org/api/auctions/all/active?limit=-1&page=-1',
@@ -69,9 +62,7 @@ const HomePage = () => {
         },
       ).then((res) => {
         if (!res.ok) {
-          console.error('Error fetching active auctions:', res.status);
-
-          return { data: [], has_more: false };
+          throw Error(`Error fetching active auctions: ${res.status}`);
         }
 
         return res.json();
@@ -84,13 +75,6 @@ const HomePage = () => {
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
-          setData({
-            nextStart: 0,
-            curPrice: 0,
-            circulating: 0,
-            auctionList: [],
-          });
-          setActiveAuction({ data: [], has_more: false });
         });
     };
 
