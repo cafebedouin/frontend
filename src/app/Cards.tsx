@@ -74,7 +74,7 @@ const Cards = ({
           </div>
           <a
             className="flex justify-center text-body-medium text-secondary hover:opacity-70 dark:text-secondary-dark"
-            href="https://app.spectrum.fi/ergo/swap?base=0000000000000000000000000000000000000000000000000000000000000000&quote=52f4544ce8a420d484ece16f9b984d81c23e46971ef5e37c29382ac50f80d5bd"
+            href="https://app.ergodex.io/ergo/swap?base=0000000000000000000000000000000000000000000000000000000000000000&quote=52f4544ce8a420d484ece16f9b984d81c23e46971ef5e37c29382ac50f80d5bd"
             target="_blank"
           >
             [buy AuctionCoin]
